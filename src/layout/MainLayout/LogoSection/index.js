@@ -7,7 +7,8 @@ import { ButtonBase } from '@mui/material';
 // project imports
 import config from 'config';
 import Logo from 'ui-component/Logo';
-import { MENU_OPEN } from 'store/actions';
+import {customizationActions} from "../../../store/reducers/customizationReducer";
+
 
 // ==============================|| MAIN LOGO ||============================== //
 
@@ -15,7 +16,7 @@ const LogoSection = () => {
   const defaultId = useSelector((state) => state.customization.defaultId);
   const dispatch = useDispatch();
   return (
-    <ButtonBase disableRipple onClick={() => dispatch({ type: MENU_OPEN, id: defaultId })} component={Link} to={config.defaultPath}>
+    <ButtonBase disableRipple onClick={() => dispatch(customizationActions.menuOpen({ id: defaultId }))} component={Link} to={config.defaultPath}>
       <Logo />
     </ButtonBase>
   );
