@@ -89,8 +89,8 @@ const FirebaseRegister = ({ ...others }) => {
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-          // firstName: Yup.string().max(255).required('Lastname is required'),
-          // lastName: Yup.string().max(255).required('Firstname is required'),
+          firstName: Yup.string().max(255).required('Firstname is required'),
+          lastName: Yup.string().max(255).required('Lastname is required'),
           password: Yup.string().max(255).required('Password is required'),
           confirmPassword: Yup.string().max(255).required('Password is required')
         })}
@@ -117,6 +117,40 @@ const FirebaseRegister = ({ ...others }) => {
       >
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
           <form noValidate onSubmit={handleSubmit} {...others}>
+            <FormControl fullWidth error={Boolean(touched.firstName && errors.firstName)} sx={{ ...theme.typography.customInput }}>
+              <InputLabel htmlFor="outlined-adornment-firstname-register">First Name</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-firstname-register"
+                type="text"
+                value={values.firstName}
+                name="firstName"
+                onBlur={handleBlur}
+                onChange={handleChange}
+              />
+              {touched.firstName && errors.firstName && (
+                <FormHelperText error id="standard-weight-helper-text--register">
+                  {errors.firstName}
+                </FormHelperText>
+              )}
+            </FormControl>
+
+            <FormControl fullWidth error={Boolean(touched.lastName && errors.lastName)} sx={{ ...theme.typography.customInput }}>
+              <InputLabel htmlFor="outlined-adornment-lastname-register">Last Name</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-lastname-register"
+                type="text"
+                value={values.lastName}
+                name="lastName"
+                onBlur={handleBlur}
+                onChange={handleChange}
+              />
+              {touched.lastName && errors.lastName && (
+                <FormHelperText error id="standard-weight-helper-text--register">
+                  {errors.lastName}
+                </FormHelperText>
+              )}
+            </FormControl>
+
             <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
               <InputLabel htmlFor="outlined-adornment-email-register">Email Address / Username</InputLabel>
               <OutlinedInput
