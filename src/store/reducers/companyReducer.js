@@ -7,7 +7,7 @@ export const companySlice = createSlice({
   },
   reducers: {
     setCompany: (state, action) => {
-      localStorage.setItem('company', action.payload.id);
+      localStorage.setItem('company', action.payload?.id);
       return { ...state, ...action.payload };
     },
     setCompanyStats: (state, action) => {
