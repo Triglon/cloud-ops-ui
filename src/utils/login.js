@@ -2,7 +2,6 @@ import CoreApi from '../api/CoreApi';
 import { profileActions } from '../store/reducers/profileReducer';
 import store from '../store';
 import { companyActions } from '../store/reducers/companyReducer';
-import { LOGIN, ROOT } from '../constants';
 
 export const login = async (email, password) => {
   localStorage.removeItem('company');

@@ -1,5 +1,6 @@
 // assets
 import { IconKey } from '@tabler/icons';
+import { AppRoutes } from '../routes/routes';
 
 // constant
 const icons = {
@@ -25,14 +26,14 @@ const pages = {
           id: 'login3',
           title: 'Login',
           type: 'item',
-          url: '/login',
+          url: AppRoutes.login,
           target: true
         },
         {
           id: 'register3',
           title: 'Register',
           type: 'item',
-          url: '/register',
+          url: AppRoutes.register,
           target: true
         }
       ]

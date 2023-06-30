@@ -39,7 +39,7 @@ import User1 from 'assets/images/users/user-round.svg';
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 import { authActions } from '../../../../store/reducers/authReducer';
-import { LOGIN } from '../../../../constants';
+import AppRoutes from '../../../../routes';
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -60,7 +60,7 @@ const ProfileSection = () => {
   const anchorRef = useRef(null);
   const handleLogout = async () => {
     dispatch(authActions.logout());
-    navigate(LOGIN);
+    navigate(AppRoutes.login);
   };
 
   const handleClose = (event) => {
