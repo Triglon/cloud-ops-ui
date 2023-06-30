@@ -26,7 +26,7 @@ import SubCard from 'ui-component/cards/SubCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
 
-import {customizationActions} from "../../store/reducers/customizationReducer";
+import { customizationActions } from '../../store/reducers/customizationReducer';
 
 // concat 'px'
 function valueText(value) {
@@ -50,6 +50,7 @@ const Customization = () => {
   const [borderRadius, setBorderRadius] = useState(customization.borderRadius);
   const handleBorderRadius = (event, newValue) => {
     setBorderRadius(newValue);
+    dispatch(customizationActions.setBorderRadius({ borderRadius: newValue }));
   };
 
   useEffect(() => {
