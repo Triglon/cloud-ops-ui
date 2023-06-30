@@ -6,9 +6,9 @@ import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui
 // project imports
 import EarningCard from './EarningCard';
 import PopularCard from './PopularCard';
-import TotalOrderLineChartCard from './TotalOrderLineChartCard';
+import PipelineStageCard from './PipelineStageCard';
 import TotalIncomeDarkCard from './TotalIncomeDarkCard';
-import TotalIncomeLightCard from './TotalIncomeLightCard';
+import PipelineEnvCard from './PipelineEnvCard';
 import TotalGrowthBarChart from './TotalGrowthBarChart';
 import { gridSpacing } from 'store/constant';
 import MuiTypography from '@mui/material/Typography';
@@ -83,11 +83,11 @@ const Pipeline = () => {
         <Grid container spacing={gridSpacing} columns={{ xs: 4, sm: 8, md: 12 }}>
           {envs.map((env, index) => (
             <Grid item xs={numColumns} key={env}>
-              <TotalIncomeLightCard isLoading={isLoading} />
+              <PipelineEnvCard isLoading={isLoading} />
 
               {stages[index].map((stage) => (
                 <p key={stage}>
-                  <TotalOrderLineChartCard isLoading={isLoading} />
+                  <PipelineStageCard isLoading={isLoading} />
                 </p>
               ))}
             </Grid>
