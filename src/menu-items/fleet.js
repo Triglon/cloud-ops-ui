@@ -13,7 +13,7 @@ const fleet = {
       id: 'default',
       title: 'Fleet',
       type: 'item',
-      url: '/dashboard/default',
+      url: AppRoutes.fleet,
       icon: IconCloudComputing,
       breadcrumbs: false
     },
@@ -21,7 +21,7 @@ const fleet = {
       id: 'pipeline',
       title: 'Pipeline',
       type: 'item',
-      url: '/dashboard/default',
+      url: AppRoutes.pipeline,
       icon: IconTestPipe,
       breadcrumbs: false
     }

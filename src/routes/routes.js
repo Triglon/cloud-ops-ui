@@ -2,7 +2,10 @@ export const AppRoutes = {
   root: '/',
   login: '/login',
   register: '/register',
-  privacyPolicy: 'privacy-policy'
+  privacyPolicy: 'privacy-policy',
+  fleet: 'fleet/',
+  pipeline: 'fleet/pipeline',
+  services: 'fleet/services'
 };
 
 const PUBLIC_PATHS = [AppRoutes.login, AppRoutes.register, AppRoutes.privacyPolicy];
