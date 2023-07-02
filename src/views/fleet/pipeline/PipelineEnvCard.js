@@ -40,7 +40,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ==============================|| DASHBOARD - TOTAL INCOME LIGHT CARD ||============================== //
 
-const PipelineEnvCard = ({ isLoading }) => {
+const PipelineEnvCard = ({ isLoading, data }) => {
   const theme = useTheme();
 
   return (
@@ -71,7 +71,7 @@ const PipelineEnvCard = ({ isLoading }) => {
                     mt: 0.45,
                     mb: 0.45
                   }}
-                  primary={<Typography variant="h4">$203k</Typography>}
+                  primary={<Typography variant="h4">{data.name}</Typography>}
                   secondary={
                     <Typography
                       variant="subtitle2"

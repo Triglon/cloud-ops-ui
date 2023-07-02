@@ -9,15 +9,11 @@ const core_axios = axios.create({
 
 core_axios.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
-  const company = localStorage.getItem('company');
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
-  if (company) {
-    config.params = { ...config.params, ...{ company: company } };
-  }
   return config;
 });
 

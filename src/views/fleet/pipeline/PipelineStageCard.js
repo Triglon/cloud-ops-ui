@@ -18,7 +18,8 @@ import ChartDataYear from './chart-data/total-order-year-line-chart';
 // assets
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import { IconBrandGit } from '@tabler/icons';
+import { IconBrandGit, IconHammer, IconRocket } from '@tabler/icons';
+import BuildIcon from '@mui/icons-material/Build';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
@@ -64,7 +65,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ==============================|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||============================== //
 
-const PipelineStageCard = ({ isLoading }) => {
+const PipelineStageCard = ({ isLoading, data }) => {
   const theme = useTheme();
 
   const [timeValue, setTimeValue] = useState(false);
@@ -72,6 +73,16 @@ const PipelineStageCard = ({ isLoading }) => {
     setTimeValue(newValue);
   };
 
+  const getIcon = (stage) => {
+    switch (stage) {
+      case 'source':
+        return <IconBrandGit fontSize="inherit" />;
+      case 'build':
+        return <IconHammer fontSize="inherit" />;
+      case 'deploy':
+        return <IconRocket fontSize="inherit" />;
+    }
+  };
   return (
     <>
       {isLoading ? (
@@ -93,7 +104,7 @@ const PipelineStageCard = ({ isLoading }) => {
                         mt: 1
                       }}
                     >
-                      <IconBrandGit fontSize="inherit" />
+                      {getIcon(data.stage)}
                     </Avatar>
                   </Grid>
                   <Grid item>
@@ -126,7 +137,7 @@ const PipelineStageCard = ({ isLoading }) => {
                         {timeValue ? (
                           <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>$108</Typography>
                         ) : (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>$961</Typography>
+                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{data.stage}</Typography>
                         )}
                       </Grid>
                       <Grid item>

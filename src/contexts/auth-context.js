@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { companyActions } from '../store/reducers/companyReducer';
 import { authActions } from '../store/reducers/authReducer';
 import { profileActions } from '../store/reducers/profileReducer';
+import { cloudAccountActions } from '../store/reducers/cloudAccountReducer';
+import { projectActions } from '../store/reducers/projectReducer';
 
 // The role of this context is to propagate authentication state through the App tree.
 
@@ -36,6 +38,18 @@ export const AuthProvider = (props) => {
         dispatch(companyActions.setCompany(profile.data.companies[0]));
 
         dispatch(authActions.login());
+
+        const cloudAccounts = await CoreApi.getCloudAccounts();
+        dispatch(cloudAccountActions.setList(cloudAccounts.data.results));
+
+        const projects = cloudAccounts.data.results.reduce((projects, obj) => {
+          return projects.concat(obj.projects);
+        }, []);
+        if (projects.length) {
+          dispatch(projectActions.setProject(projects[0]));
+        } else {
+          dispatch(projectActions.setInitialized(false));
+        }
       } else {
         dispatch(authActions.logout());
       }
