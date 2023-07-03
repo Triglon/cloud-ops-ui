@@ -74,7 +74,7 @@ const PipelineStageCard = ({ isLoading, data }) => {
   };
 
   const getIcon = (stage) => {
-    switch (stage) {
+    switch (stage.toLowerCase()) {
       case 'source':
         return <IconBrandGit fontSize="inherit" />;
       case 'build':
@@ -110,23 +110,11 @@ const PipelineStageCard = ({ isLoading, data }) => {
                     </Avatar>
                   </Grid>
                   <Grid item>
-                    <Button
-                      disableElevation
-                      variant={timeValue ? 'contained' : 'text'}
-                      size="small"
-                      sx={{ color: 'inherit' }}
-                      onClick={(e) => handleChangeTime(e, true)}
-                    >
-                      Month
+                    <Button disableElevation variant={timeValue ? 'contained' : 'text'} size="small" sx={{ color: 'inherit' }}>
+                      <strong>Status: </strong>
                     </Button>
-                    <Button
-                      disableElevation
-                      variant={!timeValue ? 'contained' : 'text'}
-                      size="small"
-                      sx={{ color: 'inherit' }}
-                      onClick={(e) => handleChangeTime(e, false)}
-                    >
-                      Year
+                    <Button disableElevation variant={!timeValue ? 'contained' : 'text'} size="small" sx={{ color: 'inherit' }}>
+                      {data?.latest_execution?.status}
                     </Button>
                   </Grid>
                 </Grid>
@@ -162,13 +150,13 @@ const PipelineStageCard = ({ isLoading, data }) => {
                             color: theme.palette.primary[200]
                           }}
                         >
-                          Total Order
+                          Pipeline Stage
                         </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
                   <Grid item xs={6}>
-                    {timeValue ? <Chart {...ChartDataMonth} /> : <Chart {...ChartDataYear} />}
+                    {/*{timeValue ? <Chart {...ChartDataMonth} /> : <Chart {...ChartDataYear} />}*/}
                   </Grid>
                 </Grid>
               </Grid>

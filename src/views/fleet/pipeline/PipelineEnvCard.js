@@ -80,7 +80,7 @@ const PipelineEnvCard = ({ isLoading, data }) => {
                         mt: 0.5
                       }}
                     >
-                      Total Income
+                      Environment Name
                     </Typography>
                   }
                 />

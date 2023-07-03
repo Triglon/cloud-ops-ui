@@ -61,7 +61,6 @@ const MainLayout = () => {
   const dispatch = useDispatch();
 
   const handleLeftDrawerToggle = () => {
-
     dispatch(customizationActions.setMenu({ opened: !leftDrawerOpened }));
   };
 
