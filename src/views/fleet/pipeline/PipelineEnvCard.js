@@ -71,7 +71,7 @@ const PipelineEnvCard = ({ isLoading, data }) => {
                     mt: 0.45,
                     mb: 0.45
                   }}
-                  primary={<Typography variant="h4">{data.name}</Typography>}
+                  primary={<Typography variant="h4">{data?.name || 'Stage'}</Typography>}
                   secondary={
                     <Typography
                       variant="subtitle2"

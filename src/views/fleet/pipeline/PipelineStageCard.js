@@ -81,6 +81,8 @@ const PipelineStageCard = ({ isLoading, data }) => {
         return <IconHammer fontSize="inherit" />;
       case 'deploy':
         return <IconRocket fontSize="inherit" />;
+      default:
+        return <IconBrandGit fontSize="inherit" />;
     }
   };
   return (
@@ -104,7 +106,7 @@ const PipelineStageCard = ({ isLoading, data }) => {
                         mt: 1
                       }}
                     >
-                      {getIcon(data.stage)}
+                      {getIcon(data?.stage)}
                     </Avatar>
                   </Grid>
                   <Grid item>
@@ -137,7 +139,7 @@ const PipelineStageCard = ({ isLoading, data }) => {
                         {timeValue ? (
                           <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>$108</Typography>
                         ) : (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{data.stage}</Typography>
+                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{data?.stage}</Typography>
                         )}
                       </Grid>
                       <Grid item>

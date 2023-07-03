@@ -32,8 +32,7 @@ const Pipeline = () => {
     { name: 'staging', stages: [{ stage: 'source' }, { stage: 'build' }, { stage: 'deploy' }] },
     { name: 'production', stages: [{ stage: 'source' }, { stage: 'build' }, { stage: 'deploy' }] }
   ]);
-  const [stages, setStages] = useState([]);
-  const [numColumns, setNumColumns] = useState(1);
+  const [numColumns, setNumColumns] = useState(4);
 
   useEffect(() => {
     if (project.initialized && project.data.id) {
@@ -57,23 +56,15 @@ const Pipeline = () => {
     for (const service of services) {
       if (serviceId === service.id) {
         setCurrentServiceId(serviceId);
-        const stages = environments.map((env) => env.stages);
-        setStages(stages);
-
         setEnvironments(service.environments);
-        setNumColumns(Math.ceil(12 / service.environments.length));
-        console.log('match');
+        if (service.environments.length) {
+          setNumColumns(Math.ceil(12 / service.environments.length));
+        } else {
+          setNumColumns(4);
+        }
       }
     }
   };
-
-  // // Add empty strings to stages with fewer items
-  // const maxStageCount = Math.max(...stages.map((stage) => stage.length));
-  // stages.forEach((stage) => {
-  //   while (stage.length < maxStageCount) {
-  //     stage.push('');
-  //   }
-  // });
 
   return (
     <Grid container spacing={gridSpacing}>
@@ -106,7 +97,7 @@ const Pipeline = () => {
             <Grid item xs={numColumns} key={env.name}>
               <PipelineEnvCard isLoading={isLoading} data={env} />
 
-              {stages[index]?.map((stage) => (
+              {env?.pipeline?.stages?.map((stage) => (
                 <Box key={stage} sx={{ pt: 2 }}>
                   <PipelineStageCard isLoading={isLoading} data={stage} />
                 </Box>
