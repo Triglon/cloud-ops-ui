@@ -21,6 +21,10 @@ export default class CoreApi {
     return await core_axios.get('/my-profile');
   };
 
+  static getGithubLoginUrl = async () => {
+    return await core_axios.get('/accounts/github/login/url');
+  };
+
   static getProjectDetails = async (id) => {
     return await core_axios.get(`/fleet-project/${id}`);
   };

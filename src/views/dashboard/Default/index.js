@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // material-ui
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 
 // project imports
 import EarningCard from './EarningCard';
@@ -11,6 +11,9 @@ import TotalIncomeDarkCard from './TotalIncomeDarkCard';
 import TotalIncomeLightCard from './TotalIncomeLightCard';
 import TotalGrowthBarChart from './TotalGrowthBarChart';
 import { gridSpacing } from 'store/constant';
+import { IconBrandTelegram } from '@tabler/icons';
+import Logo from '../../../ui-component/Logo';
+import { Link } from 'react-router-dom';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
@@ -23,6 +26,12 @@ const Dashboard = () => {
   return (
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
+        <Link to="/fleet/github/login">
+          <Button variant="contained" disableElevation endIcon={<IconBrandTelegram stroke={1.5} size="1.3rem" />}>
+            Mail
+          </Button>
+        </Link>
+
         <Grid container spacing={gridSpacing}>
           <Grid item lg={4} md={6} sm={6} xs={12}>
             <EarningCard isLoading={isLoading} />
