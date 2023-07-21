@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { useState, useEffect } from 'react';
 
-export const GithubLoginView = (props) => {
+export const RepositoriesView = (props) => {
   const dispatch = useDispatch();
 
   const openFB = async () => {
@@ -40,6 +40,28 @@ export const GithubLoginView = (props) => {
       left=${left}
       `
     );
+
+    var timer = setInterval(async function () {
+      if (platformWindow.closed) {
+        clearInterval(timer);
+        // const res = await CoreApi.getSocialPages();
+        // dispatch(setSocialPages(res.data));
+        // // TODO: check the pages here
+        // dispatch(
+        //   setPlatforms([
+        //     {
+        //       id: uuid(),
+        //       createdAt: '27/03/2019',
+        //       origin: 'facebook',
+        //       name: 'Lassie & Laddie',
+        //       media: '/static/images/platforms/facebook.png',
+        //       description: 'Connect Your Facebook Page',
+        //       followers: '44k'
+        //     }
+        //   ])
+        // );
+      }
+    }, 500);
   };
 
   return (
@@ -54,7 +76,7 @@ export const GithubLoginView = (props) => {
         }}
       >
         <Typography sx={{ m: 1 }} variant="h4">
-          Pages
+          Repositories
         </Typography>
         <Box sx={{ m: 1 }}>
           <Button color="primary" variant="contained" onClick={openFB}>

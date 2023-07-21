@@ -5,7 +5,8 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import Pipeline from '../views/fleet/pipeline';
 import Services from '../views/fleet/services';
-import { GithubLoginView } from '../views/fleet/github/login';
+import { RepositoriesView } from '../views/fleet/repositories';
+import { GithubSuccessView } from '../views/fleet/repositories/github-success';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -55,13 +56,18 @@ const MainRoutes = {
           element: <Pipeline />
         },
         {
-          path: 'github',
+          path: 'repositories',
           children: [
             {
-              path: 'login',
-              element: <GithubLoginView />
+              path: '',
+              element: <RepositoriesView />
+            },
+            {
+              path: 'github-success',
+              element: <GithubSuccessView />
             }
           ]
+          // element: <RepositoriesView />
         }
       ]
     },

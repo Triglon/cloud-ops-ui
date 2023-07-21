@@ -1,5 +1,5 @@
 // assets
-import { IconCloudComputing, IconTestPipe } from '@tabler/icons';
+import { IconCloudComputing, IconTestPipe, IconBrandGit } from '@tabler/icons';
 import { AppRoutes } from '../routes/routes';
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
@@ -23,6 +23,14 @@ const fleet = {
       type: 'item',
       url: AppRoutes.pipeline,
       icon: IconTestPipe,
+      breadcrumbs: false
+    },
+    {
+      id: 'repositories',
+      title: 'Repository',
+      type: 'item',
+      url: AppRoutes.repositories,
+      icon: IconBrandGit,
       breadcrumbs: false
     }
   ]

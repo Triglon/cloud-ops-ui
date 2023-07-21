@@ -5,7 +5,8 @@ export const AppRoutes = {
   privacyPolicy: 'privacy-policy',
   fleet: 'fleet/',
   pipeline: 'fleet/pipeline',
-  services: 'fleet/services'
+  services: 'fleet/services',
+  repositories: 'fleet/repositories'
 };
 
 const PUBLIC_PATHS = [AppRoutes.login, AppRoutes.register, AppRoutes.privacyPolicy];
