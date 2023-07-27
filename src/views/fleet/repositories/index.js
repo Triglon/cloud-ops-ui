@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
 import CoreApi from '../../../api/CoreApi';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 export const RepositoriesView = (props) => {
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
   const openFB = async () => {
     const urlData = await CoreApi.getGithubLoginUrl();
     const w = 600;
@@ -41,9 +41,21 @@ export const RepositoriesView = (props) => {
       `
     );
 
-    var timer = setInterval(async function () {
+    const timer = setInterval(async function () {
       if (platformWindow.closed) {
         clearInterval(timer);
+        setLoading(true);
+
+        const uid = localStorage.getItem('uid');
+        const repoConnectionId = localStorage.getItem('repoConnectionId');
+        localStorage.removeItem('uid');
+        localStorage.removeItem('repoConnectionId');
+        const data = await CoreApi.updateConnectionRepo(repoConnectionId, uid);
+        // const urlParams = new URLSearchParams(platformWindow.location.search);
+        // let uid = urlParams.get('uid');
+        console.log(data);
+        setLoading(false);
+
         // const res = await CoreApi.getSocialPages();
         // dispatch(setSocialPages(res.data));
         // // TODO: check the pages here
@@ -84,6 +96,13 @@ export const RepositoriesView = (props) => {
           </Button>
         </Box>
       </Box>
+      {loading && (
+        <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" sx={{ minHeight: '100vh' }}>
+          <Grid item xs={3}>
+            <CircularProgress />
+          </Grid>
+        </Grid>
+      )}
     </Box>
   );
 };
