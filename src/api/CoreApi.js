@@ -25,8 +25,12 @@ export default class CoreApi {
     return await core_axios.get('/accounts/github/login/url');
   };
 
-  static updateConnectionRepo = async (repoConnectionId, uid) => {
+  static updateRepoConnection = async (repoConnectionId, uid) => {
     return await core_axios.put(`/repository-connection/${repoConnectionId}/`, { uid });
+  };
+
+  static getRepoConnections = async (repoConnectionId, uid) => {
+    return await core_axios.get(`/repository-connection/`);
   };
 
   static getProjectDetails = async (id) => {

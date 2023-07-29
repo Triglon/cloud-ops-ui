@@ -5,6 +5,7 @@ import profile from './reducers/profileReducer';
 import company from './reducers/companyReducer';
 import cloudAccount from './reducers/cloudAccountReducer';
 import project from './reducers/projectReducer';
+import repoConnection from './reducers/repoConnectionReducer';
 
 export default configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
     profile,
     company,
     cloudAccount,
-    project
+    project,
+    repoConnection
   }
 });

@@ -3,6 +3,7 @@ import CoreApi from '../../../api/CoreApi';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { useState, useEffect } from 'react';
+import { repoConnectionActions } from '../../../store/reducers/repoConnectionReducer';
 
 export const RepositoriesView = (props) => {
   const dispatch = useDispatch();
@@ -50,28 +51,28 @@ export const RepositoriesView = (props) => {
         const repoConnectionId = localStorage.getItem('repoConnectionId');
         localStorage.removeItem('uid');
         localStorage.removeItem('repoConnectionId');
-        const data = await CoreApi.updateConnectionRepo(repoConnectionId, uid);
+        const data = await CoreApi.updateRepoConnection(repoConnectionId, uid);
         // const urlParams = new URLSearchParams(platformWindow.location.search);
         // let uid = urlParams.get('uid');
         console.log(data);
         setLoading(false);
 
-        // const res = await CoreApi.getSocialPages();
-        // dispatch(setSocialPages(res.data));
-        // // TODO: check the pages here
-        // dispatch(
-        //   setPlatforms([
-        //     {
-        //       id: uuid(),
-        //       createdAt: '27/03/2019',
-        //       origin: 'facebook',
-        //       name: 'Lassie & Laddie',
-        //       media: '/static/images/platforms/facebook.png',
-        //       description: 'Connect Your Facebook Page',
-        //       followers: '44k'
-        //     }
-        //   ])
-        // );
+        const res = await CoreApi.getRepoConnections();
+        dispatch(repoConnectionActions.setList(res.data));
+        // TODO: check the pages here
+        dispatch(
+          setPlatforms([
+            {
+              id: uuid(),
+              createdAt: '27/03/2019',
+              origin: 'facebook',
+              name: 'Lassie & Laddie',
+              media: '/static/images/platforms/facebook.png',
+              description: 'Connect Your Facebook Page',
+              followers: '44k'
+            }
+          ])
+        );
       }
     }, 500);
   };
