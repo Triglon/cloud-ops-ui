@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
-import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Button, Grid, Skeleton, Typography } from '@mui/material';
 
 // third-party
 import Chart from 'react-apexcharts';
@@ -85,10 +85,47 @@ const PipelineStageCard = ({ isLoading, data }) => {
         return <IconBrandGit fontSize="inherit" />;
     }
   };
+
+  const getSkeleton = () => {
+    return (
+      <CardWrapper border={false} content={false}>
+        <Box sx={{ p: 2.25 }}>
+          <Grid container direction="column">
+            <Grid item>
+              <Grid container justifyContent="space-between">
+                <Grid item>
+                  <Skeleton width={64} height={64} />
+                </Grid>
+                <Grid item>
+                  <Button disableElevation variant={!timeValue ? 'contained' : 'text'} size="small" sx={{ color: 'inherit' }}>
+                    <Skeleton width={64} />
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid>
+              <Grid>
+                <Grid item xs={6}>
+                  <Grid>
+                    <Grid item>
+                      <Skeleton width={128} />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Skeleton width={64} />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Box>
+      </CardWrapper>
+    );
+  };
   return (
     <>
       {isLoading ? (
-        <SkeletonTotalOrderCard />
+        getSkeleton()
       ) : (
         <CardWrapper border={false} content={false}>
           <Box sx={{ p: 2.25 }}>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // material-ui
-import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, TextField } from '@mui/material';
 
 // project imports
 import EarningCard from './EarningCard';
@@ -66,6 +66,50 @@ const Pipeline = () => {
     }
   };
 
+  const getSkeleton = () => {
+    return (
+      <Grid item xs={12}>
+        <Grid container spacing={gridSpacing} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid item xs={4}>
+            <PipelineEnvCard isLoading={isLoading} />
+
+            <Box sx={{ pt: 2 }}>
+              <PipelineStageCard isLoading={isLoading} />
+            </Box>
+            <Box sx={{ pt: 2 }}>
+              <PipelineStageCard isLoading={isLoading} />
+            </Box>
+            <Box sx={{ pt: 2 }}>
+              <PipelineStageCard isLoading={isLoading} />
+            </Box>
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  };
+
+  const getDisplay = () => {
+    if (isLoading) {
+      return getSkeleton();
+    }
+    return (
+      <Grid item xs={12}>
+        <Grid container spacing={gridSpacing} columns={{ xs: 4, sm: 8, md: 12 }}>
+          {environments.map((env, index) => (
+            <Grid item xs={numColumns} key={env.name}>
+              <PipelineEnvCard isLoading={isLoading} data={env} />
+
+              {env?.pipeline?.stages?.map((stage) => (
+                <Box key={stage} sx={{ pt: 2 }}>
+                  <PipelineStageCard isLoading={isLoading} data={stage} />
+                </Box>
+              ))}
+            </Grid>
+          ))}
+        </Grid>
+      </Grid>
+    );
+  };
   return (
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
@@ -90,32 +134,7 @@ const Pipeline = () => {
           </Grid>
         </Grid>
       </Grid>
-
-      <Grid item xs={12}>
-        <Grid container spacing={gridSpacing} columns={{ xs: 4, sm: 8, md: 12 }}>
-          {environments.map((env, index) => (
-            <Grid item xs={numColumns} key={env.name}>
-              <PipelineEnvCard isLoading={isLoading} data={env} />
-
-              {env?.pipeline?.stages?.map((stage) => (
-                <Box key={stage} sx={{ pt: 2 }}>
-                  <PipelineStageCard isLoading={isLoading} data={stage} />
-                </Box>
-              ))}
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
-      {/*<Grid item xs={12}>*/}
-      {/*  <Grid container spacing={gridSpacing}>*/}
-      {/*    <Grid item xs={12} md={8}>*/}
-      {/*      <TotalGrowthBarChart isLoading={isLoading} />*/}
-      {/*    </Grid>*/}
-      {/*    <Grid item xs={12} md={4}>*/}
-      {/*      <PopularCard isLoading={isLoading} />*/}
-      {/*    </Grid>*/}
-      {/*  </Grid>*/}
-      {/*</Grid>*/}
+      {getDisplay()}
     </Grid>
   );
 };

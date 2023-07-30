@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
-import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Skeleton, Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -43,13 +43,30 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const PipelineEnvCard = ({ isLoading, data }) => {
   const theme = useTheme();
 
+  const getSkeleton = () => {
+    return (
+      <CardWrapper border={false} content={false}>
+        <Box sx={{ p: 2, backgroundColor: theme.palette.grey[200] }}>
+          <List sx={{ py: 0 }}>
+            <ListItem>
+              <ListItemAvatar>
+                <Skeleton width={32} height={32} />
+              </ListItemAvatar>
+              <ListItemText primary={<Skeleton />} secondary={<Skeleton />} />
+            </ListItem>
+          </List>
+        </Box>
+      </CardWrapper>
+    );
+  };
+
   return (
     <>
       {isLoading ? (
-        <TotalIncomeCard />
+        getSkeleton()
       ) : (
         <CardWrapper border={false} content={false}>
-          <Box sx={{ p: 2 }}>
+          <Box sx={{ p: 2, backgroundColor: theme.palette.grey[200] }}>
             <List sx={{ py: 0 }}>
               <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
                 <ListItemAvatar>

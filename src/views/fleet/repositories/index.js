@@ -60,19 +60,6 @@ export const RepositoriesView = (props) => {
         const res = await CoreApi.getRepoConnections();
         dispatch(repoConnectionActions.setList(res.data));
         // TODO: check the pages here
-        dispatch(
-          setPlatforms([
-            {
-              id: uuid(),
-              createdAt: '27/03/2019',
-              origin: 'facebook',
-              name: 'Lassie & Laddie',
-              media: '/static/images/platforms/facebook.png',
-              description: 'Connect Your Facebook Page',
-              followers: '44k'
-            }
-          ])
-        );
       }
     }, 500);
   };
