@@ -4,13 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { repoConnectionActions } from '../../../store/reducers/repoConnectionReducer';
 import { gridSpacing } from '../../../store/constant';
-import PipelineEnvCard from '../pipeline/PipelineEnvCard';
-import PipelineStageCard from '../pipeline/PipelineStageCard';
 import RepoConnectionCard from './RepoConnectionCard';
 
 export const RepositoriesView = (props) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const connectionList = useSelector((state) => state.repoConnection.list || []);
 
   const openFB = async () => {
@@ -50,7 +48,7 @@ export const RepositoriesView = (props) => {
     const timer = setInterval(async function () {
       if (platformWindow.closed) {
         clearInterval(timer);
-        setLoading(true);
+        setIsLoading(true);
 
         const uid = localStorage.getItem('uid');
         const repoConnectionId = localStorage.getItem('repoConnectionId');
@@ -59,7 +57,7 @@ export const RepositoriesView = (props) => {
         const data = await CoreApi.updateRepoConnection(repoConnectionId, uid);
         // const urlParams = new URLSearchParams(platformWindow.location.search);
         // let uid = urlParams.get('uid');
-        setLoading(false);
+        setIsLoading(false);
 
         const res = await CoreApi.getRepoConnections();
         dispatch(repoConnectionActions.setList(res.data.results));
@@ -68,33 +66,39 @@ export const RepositoriesView = (props) => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     CoreApi.getRepoConnections().then((res) => {
       dispatch(repoConnectionActions.setList(res.data.results));
+      setIsLoading(false);
     });
   }, []);
 
   const getSkeleton = () => {
     return (
-      <Grid item xs={12}>
+      <Grid item xs={12} sx={{ pt: 2 }}>
         <Grid container spacing={gridSpacing} columns={{ xs: 4, sm: 8, md: 12 }}>
-          <Grid item xs={4}>
-            <PipelineEnvCard isLoading={true} />
-
-            <Box sx={{ pt: 2 }}>
-              <PipelineStageCard isLoading={true} />
-            </Box>
-            <Box sx={{ pt: 2 }}>
-              <PipelineStageCard isLoading={true} />
-            </Box>
-            <Box sx={{ pt: 2 }}>
-              <PipelineStageCard isLoading={true} />
-            </Box>
+          <Grid item xs={3}>
+            <RepoConnectionCard isLoading={true} />
           </Grid>
         </Grid>
       </Grid>
     );
   };
 
+  const getDisplay = () => {
+    if (isLoading) return getSkeleton();
+    return (
+      <Grid item xs={12} sx={{ pt: 2 }}>
+        <Grid container spacing={gridSpacing} columns={{ xs: 4, sm: 8, md: 12 }}>
+          {connectionList.map((data) => (
+            <Grid item xs={3} key={`repo-connection-${data.id}`}>
+              <RepoConnectionCard data={data} />
+            </Grid>
+          ))}
+        </Grid>
+      </Grid>
+    );
+  };
   return (
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
@@ -107,15 +111,7 @@ export const RepositoriesView = (props) => {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid item xs={12} sx={{ pt: 2 }}>
-          <Grid container spacing={gridSpacing} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {connectionList.map((data) => (
-              <Grid item xs={4} key={`repo-connection-${data.id}`}>
-                <RepoConnectionCard data={data} />
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
+        {getDisplay()}
       </Grid>
     </Grid>
   );

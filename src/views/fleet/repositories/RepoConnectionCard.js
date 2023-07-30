@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, Grid, Link, Menu, MenuItem, Skeleton, Typography } from '@mui/material';
+import { Avatar, Box, CardActionArea, Grid, Link, Menu, MenuItem, Skeleton, Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -53,22 +53,8 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
 
-const EarningCard = ({ isLoading, data }) => {
+const RepoConnectionCard = ({ isLoading, data }) => {
   const theme = useTheme();
-
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const getSkeleton = () => {
-    return <Skeleton />;
-  };
 
   const getIcon = (provider) => {
     switch (provider.toLowerCase()) {
@@ -84,79 +70,104 @@ const EarningCard = ({ isLoading, data }) => {
   return (
     <>
       {isLoading ? (
-        <SkeletonEarningCard />
-      ) : (
         <CardWrapper border={false} content={false}>
           <Box sx={{ p: 2.25 }}>
             <Grid container direction="column">
               <Grid item>
                 <Grid container justifyContent="space-between">
                   <Grid item>
-                    <Avatar
-                      variant="rounded"
-                      sx={{
-                        ...theme.typography.commonAvatar,
-                        ...theme.typography.largeAvatar,
-                        backgroundColor: theme.palette.secondary[200],
-                        mt: 1
-                      }}
-                    >
-                      {getIcon(data?.provider)}
-                    </Avatar>
+                    <Skeleton width={64} />
                   </Grid>
                   <Grid item>
-                    <Avatar
-                      variant="rounded"
-                      sx={{
-                        ...theme.typography.commonAvatar,
-                        ...theme.typography.mediumAvatar,
-                        backgroundColor: theme.palette.secondary.dark,
-                        color: theme.palette.secondary[200],
-                        zIndex: 1,
-                        width: 64,
-                        height: 64
-                      }}
-                      aria-controls="menu-earning-card"
-                      aria-haspopup="true"
-                      src={data.avatar_url}
-                    ></Avatar>
+                    <Skeleton width={64} />
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item>
-                <Grid container alignItems="center">
-                  <Grid item>
-                    <Link target={'_blank'} href={data.url} rel={'noreferrer'} underline={'hover'}>
-                      <Typography
-                        sx={{ color: theme.palette.secondary.light, fontSize: '1.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}
-                      >
-                        {data.url}
-                      </Typography>
-                    </Link>
-                  </Grid>
+                <Grid item>
+                  <Skeleton width={128} />
                 </Grid>
               </Grid>
-              <Grid item sx={{ mb: 1.25 }}>
-                <Typography
-                  sx={{
-                    fontSize: '1rem',
-                    fontWeight: 500,
-                    color: theme.palette.secondary[200]
-                  }}
-                >
-                  {data?.provider?.toUpperCase() || <Skeleton />}
-                </Typography>
+              <Grid item>
+                <Skeleton />
               </Grid>
             </Grid>
           </Box>
+        </CardWrapper>
+      ) : (
+        <CardWrapper border={false} content={false}>
+          <CardActionArea onClick={() => window.open(data.url)}>
+            <Box sx={{ p: 2.25 }}>
+              <Grid container direction="column">
+                <Grid item>
+                  <Grid container justifyContent="space-between">
+                    <Grid item>
+                      <Avatar
+                        variant="rounded"
+                        sx={{
+                          ...theme.typography.commonAvatar,
+                          ...theme.typography.largeAvatar,
+                          backgroundColor: theme.palette.secondary[200],
+                          mt: 1
+                        }}
+                      >
+                        {getIcon(data?.provider)}
+                      </Avatar>
+                    </Grid>
+                    <Grid item>
+                      <Avatar
+                        variant="rounded"
+                        sx={{
+                          ...theme.typography.commonAvatar,
+                          ...theme.typography.mediumAvatar,
+                          backgroundColor: theme.palette.secondary.dark,
+                          color: theme.palette.secondary[200],
+                          zIndex: 1,
+                          width: 64,
+                          height: 64
+                        }}
+                        aria-controls="menu-earning-card"
+                        aria-haspopup="true"
+                        src={data.avatar_url}
+                      ></Avatar>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item>
+                  <Grid container alignItems="center">
+                    <Grid item>
+                      <Link target={'_blank'} href={data.url} rel={'noreferrer'} underline={'hover'}>
+                        <Typography
+                          sx={{ color: theme.palette.secondary.light, fontSize: '1.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}
+                        >
+                          {data.url}
+                        </Typography>
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item sx={{ mb: 1.25 }}>
+                  <Typography
+                    sx={{
+                      fontSize: '1rem',
+                      fontWeight: 500,
+                      color: theme.palette.secondary[200]
+                    }}
+                  >
+                    {data?.provider?.toUpperCase() || <Skeleton />}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Box>
+          </CardActionArea>
         </CardWrapper>
       )}
     </>
   );
 };
 
-EarningCard.propTypes = {
+RepoConnectionCard.propTypes = {
   isLoading: PropTypes.bool
 };
 
-export default EarningCard;
+export default RepoConnectionCard;
