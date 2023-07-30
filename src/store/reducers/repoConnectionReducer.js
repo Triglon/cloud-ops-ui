@@ -4,11 +4,11 @@ export const repoConnectionSlice = createSlice({
   name: 'repositoryConnection',
   initialState: {
     initialized: false,
-    data: null
+    list: []
   },
   reducers: {
     setList: (state, action) => {
-      return { ...state, data: action.payload, initialized: true };
+      return { ...state, list: action.payload, initialized: true };
     }
   }
 });
