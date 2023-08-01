@@ -1,26 +1,34 @@
 import { useEffect, useState } from 'react';
 
 // material-ui
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
-// project imports
-import EarningCard from './EarningCard';
-import PopularCard from './PopularCard';
-import TotalOrderLineChartCard from './TotalOrderLineChartCard';
-import TotalIncomeDarkCard from './TotalIncomeDarkCard';
-import TotalIncomeLightCard from './TotalIncomeLightCard';
-import TotalGrowthBarChart from './TotalGrowthBarChart';
 import { gridSpacing } from 'store/constant';
+import { RepositorySelect } from './RepositorySelect';
+import Header from '../../../layout/MainLayout/Header';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
-const Pipeline = () => {
+const Services = () => {
   const [isLoading, setLoading] = useState(true);
+  const [repository, setRepository] = useState(true);
+
   useEffect(() => {
     setLoading(false);
   }, []);
 
-  return <Grid container spacing={gridSpacing}></Grid>;
+  useEffect(() => {
+    console.log(repository);
+  });
+
+  return (
+    <Grid container spacing={gridSpacing}>
+      <RepositorySelect onChange={(value) => setRepository(value)} />
+      <Grid item>
+        <Typography>test {repository?.label}</Typography>
+      </Grid>
+    </Grid>
+  );
 };
 
-export default Pipeline;
+export default Services;

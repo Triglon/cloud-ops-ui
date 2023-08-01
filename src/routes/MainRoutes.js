@@ -44,7 +44,7 @@ const MainRoutes = {
       path: 'fleet',
       children: [
         {
-          path: 'default',
+          path: '',
           element: <Services />
         },
         {

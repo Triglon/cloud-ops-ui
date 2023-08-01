@@ -4,14 +4,9 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, Skeleton, TextField } from '@mui/material';
 
 // project imports
-import EarningCard from './EarningCard';
-import PopularCard from './PopularCard';
 import PipelineStageCard from './PipelineStageCard';
-import TotalIncomeDarkCard from './TotalIncomeDarkCard';
 import PipelineEnvCard from './PipelineEnvCard';
-import TotalGrowthBarChart from './TotalGrowthBarChart';
 import { gridSpacing } from 'store/constant';
-import MuiTypography from '@mui/material/Typography';
 import { useSelector } from 'react-redux';
 import CoreApi from '../../../api/CoreApi';
 import { Box } from '@mui/system';

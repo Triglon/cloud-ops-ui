@@ -29,8 +29,16 @@ export default class CoreApi {
     return await core_axios.put(`/repository-connection/${repoConnectionId}/`, { uid });
   };
 
-  static getRepoConnections = async (repoConnectionId, uid) => {
+  static getRepoConnections = async () => {
     return await core_axios.get(`/repository-connection/`);
+  };
+
+  static getRepositories = async (repoConnectionId) => {
+    return await core_axios.get(`/repository-connection/${repoConnectionId}`);
+  };
+
+  static getBranches = async (repoConnectionId, repoName) => {
+    return await core_axios.get(`/repository-connection/${repoConnectionId}/branches?repo_name=${repoName}`);
   };
 
   static getProjectDetails = async (id) => {
