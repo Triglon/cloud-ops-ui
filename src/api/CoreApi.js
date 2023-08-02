@@ -53,6 +53,15 @@ export default class CoreApi {
     return await core_axios.get('/fleet-account');
   };
 
+  static createCloudAccount = async (alias, accountId, accessKeyId, secretAccessKey, provider = 'aws') => {
+    return await core_axios.post('/fleet-account', {
+      alias: alias,
+      account_id: accountId,
+      access_key_id: accessKeyId,
+      secret_access_key: secretAccessKey
+    });
+  };
+
   static createAccount = async (email, password, confirmed_password, company) => {
     return await core_axios.post('/profile', { email, password, confirmed_password, company });
   };
