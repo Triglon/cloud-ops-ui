@@ -6,46 +6,40 @@ import { useEffect, useState } from 'react';
 import CoreApi from '../../../api/CoreApi';
 import { repoConnectionActions } from '../../../store/reducers/repoConnectionReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormControl,
-  FormHelperText,
-  Grid,
-  InputLabel,
-  OutlinedInput,
-  Paper,
-  Skeleton
-} from '@mui/material';
+import { Button, CircularProgress, Dialog, DialogContent, DialogContentText, DialogTitle, Grid, Paper, Snackbar } from '@mui/material';
 import { gridSpacing } from '../../../store/constant';
 import { cloudAccountActions } from '../../../store/reducers/cloudAccountReducer';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { login } from '../../../utils/login';
-import { useTheme } from '@mui/material/styles';
-import AnimateButton from '../../../ui-component/extended/AnimateButton';
 import { FormikTextInput } from '../../utilities/FormikTextInput';
 import { LoadingButton } from '@mui/lab';
+import MuiAlert from '@mui/material/Alert';
+import NotificationBar from '../../utilities/NotificationBar';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export const AwsAccountSelect = ({ onChange }) => {
   const dispatch = useDispatch();
   const accountList = useSelector((state) => state.cloudAccount.list);
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(true);
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [openAddAccount, setOpenAddAccount] = React.useState(false);
+  const [openSnack, setOpenSnack] = React.useState(false);
+  const [snackMessage, setSnackMessage] = React.useState({
+    message: '',
+    severity: 'warning'
+  });
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleCloseSnack = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClickOpen = () => {
+    setOpenAddAccount(true);
   };
 
   useEffect(() => {
@@ -66,29 +60,37 @@ export const AwsAccountSelect = ({ onChange }) => {
   const formik = useFormik({
     initialValues: {
       alias: '',
-      accountId: '',
-      accessKeyId: '',
-      secretAccessKey: ''
+      account_id: '',
+      access_key_id: '',
+      secret_access_key: ''
     },
     validationSchema: Yup.object({
       alias: Yup.string().max(255).required('Alias is required'),
-      accountId: Yup.string().max(255).required('Account ID is required'),
-      accessKeyId: Yup.string().max(255).required('Access Key ID is required'),
-      secretAccessKey: Yup.string().max(255).required('Secret Access Key is required')
+      account_id: Yup.string().max(255).required('Account ID is required'),
+      access_key_id: Yup.string().max(255).required('Access Key ID is required'),
+      secret_access_key: Yup.string().max(255).required('Secret Access Key is required')
     }),
     onSubmit: async (values, helpers) => {
       helpers.setSubmitting(true);
-      const resp = await CoreApi.createCloudAccount(values.alias, values.accountId, values.accessKeyId, values.secretAccessKey);
+      const resp = await CoreApi.createCloudAccount(values.alias, values.account_id, values.access_key_id, values.secret_access_key);
 
       if (resp?.success) {
+        setSnackMessage({ message: 'Account creation success', severity: 'success' });
+        setOpenSnack(true);
         await updateAccountList();
         handleClose();
       } else {
         formik.setErrors(resp.errors);
+        setSnackMessage({ message: 'Account creation error', severity: 'error' });
+        setOpenSnack(true);
       }
       helpers.setSubmitting(false);
     }
   });
+
+  const handleClose = () => {
+    setOpenAddAccount(false);
+  };
 
   return (
     <Grid container direction="row" spacing={gridSpacing}>
@@ -119,7 +121,7 @@ export const AwsAccountSelect = ({ onChange }) => {
           }}
         />
       </Grid>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={openAddAccount} onClose={handleClose}>
         <DialogTitle>Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -127,9 +129,9 @@ export const AwsAccountSelect = ({ onChange }) => {
           </DialogContentText>
           <form onSubmit={formik.handleSubmit}>
             <FormikTextInput formik={formik} name="alias" type={'text'} label={'Alias'} />
-            <FormikTextInput formik={formik} name="accountId" type={'text'} label={'Account ID'} />
-            <FormikTextInput formik={formik} name="accessKeyId" type={'password'} label={'Access Key ID'} />
-            <FormikTextInput formik={formik} name="secretAccessKey" type={'password'} label={'Secret Access Key'} />
+            <FormikTextInput formik={formik} name="account_id" type={'text'} label={'Account ID'} />
+            <FormikTextInput formik={formik} name="access_key_id" type={'password'} label={'Access Key ID'} />
+            <FormikTextInput formik={formik} name="secret_access_key" type={'password'} label={'Secret Access Key'} />
 
             <Button onClick={handleClose}>Cancel</Button>
             <LoadingButton loading={formik.isSubmitting} disabled={formik.isSubmitting} type="submit">
@@ -138,6 +140,8 @@ export const AwsAccountSelect = ({ onChange }) => {
           </form>
         </DialogContent>
       </Dialog>
+
+      <NotificationBar message={snackMessage.message} severity={snackMessage.severity} open={openSnack} handleClose={handleCloseSnack} />
     </Grid>
   );
 };
