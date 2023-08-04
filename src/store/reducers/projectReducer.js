@@ -4,7 +4,8 @@ export const projectSlice = createSlice({
   name: 'project',
   initialState: {
     initialized: false,
-    data: null
+    data: null,
+    list: []
   },
   reducers: {
     setProject: (state, action) => {
@@ -13,6 +14,9 @@ export const projectSlice = createSlice({
     },
     setInitialized: (state, action) => {
       return { ...state, initialized: action.payload };
+    },
+    setList: (state, action) => {
+      return { ...state, ...{ list: action.payload } };
     }
   }
 });

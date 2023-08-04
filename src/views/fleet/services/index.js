@@ -11,6 +11,7 @@ import { Box } from '@mui/system';
 
 import React from 'react';
 import { makeStyles } from '@mui/material';
+import { ProjectSelect } from './ProjectSelect';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
@@ -18,27 +19,26 @@ const Services = () => {
   const [isLoading, setLoading] = useState(true);
   const [repository, setRepository] = useState(true);
   const [cloudAccount, setCloudAccount] = useState(true);
+  const [project, setProject] = useState(true);
 
   useEffect(() => {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    console.log(repository);
-  });
+  useEffect(() => {});
 
   return (
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
-        <Typography>AWS Account</Typography>
+        <Typography>Project</Typography>
         <Divider sx={{ borderColor: 'primary.main' }}></Divider>
       </Grid>
       <Grid item xs={12}>
-        <AwsAccountSelect onChange={(value) => setCloudAccount(value)} />
+        <ProjectSelect onChange={(value) => setProject(value)} />
       </Grid>
 
       <Grid item xs={12}>
-        <Typography>Project</Typography>
+        <Typography>Repository</Typography>
         <Divider sx={{ borderColor: 'primary.main' }}></Divider>
       </Grid>
       <Grid item xs={12}>

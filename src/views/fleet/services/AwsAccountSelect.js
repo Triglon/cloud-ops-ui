@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import CoreApi from '../../../api/CoreApi';
 import { repoConnectionActions } from '../../../store/reducers/repoConnectionReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, CircularProgress, Dialog, DialogContent, DialogContentText, DialogTitle, Grid, Paper, Snackbar } from '@mui/material';
+import { Box, Button, CircularProgress, Dialog, DialogContent, DialogContentText, DialogTitle, Grid, Paper, Snackbar } from '@mui/material';
 import { gridSpacing } from '../../../store/constant';
 import { cloudAccountActions } from '../../../store/reducers/cloudAccountReducer';
 import { useFormik } from 'formik';
@@ -93,40 +93,36 @@ export const AwsAccountSelect = ({ onChange }) => {
   };
 
   return (
-    <Grid container direction="row" spacing={gridSpacing}>
-      <Grid item xs={2}>
-        <Autocomplete
-          disablePortal
-          options={accountList}
-          disabled={!accountList.length}
-          sx={{ width: 300 }}
-          onChange={(event, value) => onChange(value)}
-          renderInput={(params) => <TextField {...params} label={isLoadingAccounts ? <CircularProgress size="1rem" /> : 'Cloud Account'} />}
-          PaperComponent={({ children }) => {
-            return (
-              <Paper>
-                <Button
-                  color="primary"
-                  fullWidth
-                  sx={{ justifyContent: 'flex-start', pl: 2 }}
-                  onMouseDown={() => {
-                    handleClickOpen();
-                  }}
-                >
-                  + Add New
-                </Button>
-                {children}
-              </Paper>
-            );
-          }}
-        />
-      </Grid>
+    <Box>
+      <Autocomplete
+        disablePortal
+        fullWidth={true}
+        options={accountList}
+        disabled={!accountList.length}
+        onChange={(event, value) => onChange(value)}
+        renderInput={(params) => <TextField {...params} label={isLoadingAccounts ? <CircularProgress size="1rem" /> : 'Cloud Account'} />}
+        PaperComponent={({ children }) => {
+          return (
+            <Paper>
+              <Button
+                color="primary"
+                fullWidth
+                sx={{ justifyContent: 'flex-start', pl: 2 }}
+                onMouseDown={() => {
+                  handleClickOpen();
+                }}
+              >
+                + Add New
+              </Button>
+              {children}
+            </Paper>
+          );
+        }}
+      />
       <Dialog open={openAddAccount} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Cloud Account</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates occasionally.
-          </DialogContentText>
+          <DialogContentText>Add cloud account details for AWS</DialogContentText>
           <form onSubmit={formik.handleSubmit}>
             <FormikTextInput formik={formik} name="alias" type={'text'} label={'Alias'} />
             <FormikTextInput formik={formik} name="account_id" type={'text'} label={'Account ID'} />
@@ -142,7 +138,7 @@ export const AwsAccountSelect = ({ onChange }) => {
       </Dialog>
 
       <NotificationBar message={snackMessage.message} severity={snackMessage.severity} open={openSnack} handleClose={handleCloseSnack} />
-    </Grid>
+    </Box>
   );
 };
 
