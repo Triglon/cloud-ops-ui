@@ -6,10 +6,17 @@ import { useEffect, useState } from 'react';
 import CoreApi from '../../../api/CoreApi';
 import { repoConnectionActions } from '../../../store/reducers/repoConnectionReducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { CircularProgress, Grid, Skeleton } from '@mui/material';
+import { CircularProgress, FormHelperText, Grid, Skeleton } from '@mui/material';
 import { gridSpacing } from '../../../store/constant';
 
-export const RepositorySelect = ({ onChange }) => {
+export const RepositorySelect = ({
+  onBranchChange,
+  onConnectionChange,
+  onRepositoryChange,
+  connectionError,
+  branchError,
+  repositoryError
+}) => {
   const dispatch = useDispatch();
   const connectionList = useSelector((state) => state.repoConnection.list);
 
@@ -30,22 +37,25 @@ export const RepositorySelect = ({ onChange }) => {
 
   const updateRepositoryList = (connection) => {
     setRepoConnection(connection);
-    if (connection.id) {
+    if (connection?.id) {
       setIsLoadingRepositories(true);
       CoreApi.getRepositories(connection.id).then((res) => {
         setRepositories(
           res.data.repositories.map((r) => {
-            return { ...r, label: r.full_name, value: r.full_name };
+            return { label: r.full_name, value: r.full_name };
           })
         );
         setIsLoadingRepositories(false);
       });
+      onConnectionChange(connection);
     }
   };
 
   const updateBranchList = (repository) => {
-    setRepository(repository);
-    if (repoConnection.id && repository.value) {
+    console.log(repository);
+    setRepository({ label: repository?.full_name, value: repository?.full_name });
+    onRepositoryChange(repository);
+    if (repoConnection?.id && repository?.value) {
       setIsLoadingBranches(true);
       CoreApi.getBranches(repoConnection.id, repository.value).then((res) => {
         setBranchList(
@@ -70,6 +80,7 @@ export const RepositorySelect = ({ onChange }) => {
           onChange={(event, value) => updateRepositoryList(value)}
           renderInput={(params) => <TextField {...params} label="Connection" />}
         />
+        <FormHelperText error>{connectionError}</FormHelperText>
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <Autocomplete
@@ -83,6 +94,7 @@ export const RepositorySelect = ({ onChange }) => {
             <TextField {...params} label={isLoadingRepositories ? <CircularProgress size="1rem" /> : 'Repository'} />
           )}
         />
+        <FormHelperText error>{repositoryError}</FormHelperText>
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <Autocomplete
@@ -91,16 +103,17 @@ export const RepositorySelect = ({ onChange }) => {
           options={branchList}
           disabled={!branchList.length}
           sx={{ width: 300 }}
-          onChange={(event, value) => onChange({ repoConnection, repository, branch: value })}
+          onChange={(event, value) => onBranchChange(value)}
           renderInput={(params) => <TextField {...params} label={isLoadingBranches ? <CircularProgress size="1rem" /> : 'Branch'} />}
         />
+        <FormHelperText error>{branchError}</FormHelperText>
       </Grid>
     </Grid>
   );
 };
 
 RepositorySelect.propTypes = {
-  onChange: PropTypes.func.isRequired
+  onBranchChange: PropTypes.func.isRequired
 };
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
