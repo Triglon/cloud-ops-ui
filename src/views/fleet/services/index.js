@@ -34,13 +34,13 @@ const Services = () => {
       project: '',
       repository_connection: '',
       repository_branch: '',
-      repository_name: ''
+      repository_url: ''
     },
     validationSchema: Yup.object({
       project: Yup.string().max(255).required('Please select project'),
       repository_connection: Yup.string().max(255).required('Please select connection'),
       repository_branch: Yup.string().max(255).required('Please select branch'),
-      repository_name: Yup.string().max(255).required('Please select repository')
+      repository_url: Yup.string().max(255).required('Please select repository')
     }),
 
     onSubmit: async (values, helpers) => {
@@ -87,8 +87,8 @@ const Services = () => {
               branchError={formik.errors.repository_branch}
               onConnectionChange={(value) => formik.setFieldValue('repository_connection', value?.id)}
               connectionError={formik.errors.repository_connection}
-              onRepositoryChange={(value) => formik.setFieldValue('repository_name', value?.value)}
-              repositoryError={formik.errors.repository_name}
+              onRepositoryChange={(value) => formik.setFieldValue('repository_url', value?.url)}
+              repositoryError={formik.errors.repository_url}
             />
           </FormControl>
         </Grid>

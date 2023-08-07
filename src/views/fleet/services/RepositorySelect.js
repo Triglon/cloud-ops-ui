@@ -40,11 +40,7 @@ export const RepositorySelect = ({
     if (connection?.id) {
       setIsLoadingRepositories(true);
       CoreApi.getRepositories(connection.id).then((res) => {
-        setRepositories(
-          res.data.repositories.map((r) => {
-            return { label: r.full_name, value: r.full_name };
-          })
-        );
+        setRepositories(res.data.repositories);
         setIsLoadingRepositories(false);
       });
       onConnectionChange(connection);
@@ -53,11 +49,11 @@ export const RepositorySelect = ({
 
   const updateBranchList = (repository) => {
     console.log(repository);
-    setRepository({ label: repository?.full_name, value: repository?.full_name });
+    setRepository(repository);
     onRepositoryChange(repository);
-    if (repoConnection?.id && repository?.value) {
+    if (repoConnection?.id && repository?.url) {
       setIsLoadingBranches(true);
-      CoreApi.getBranches(repoConnection.id, repository.value).then((res) => {
+      CoreApi.getBranches(repoConnection.id, repository.full_name).then((res) => {
         setBranchList(
           res.data.map((branch) => {
             return { ...branch, label: branch.name, value: branch.name };
