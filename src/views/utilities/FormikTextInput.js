@@ -2,11 +2,11 @@ import { FormControl, FormHelperText, InputLabel, OutlinedInput } from '@mui/mat
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 
-export const FormikTextInput = ({ formik, id, name, type, label }) => {
+export const FormikTextInput = ({ formik, id, name, type, label, placeholder }) => {
   const theme = useTheme();
 
   return (
-    <FormControl fullWidth error={Boolean(formik.touched[name] && formik.errors[name])} sx={{ ...theme.typography.customInput }}>
+    <FormControl fullWidth error={Boolean(formik.touched[name] && formik.errors[name])}>
       <InputLabel htmlFor={id}>{label}</InputLabel>
       <OutlinedInput
         id={id}
@@ -17,6 +17,7 @@ export const FormikTextInput = ({ formik, id, name, type, label }) => {
         onChange={formik.handleChange}
         label={label}
         inputProps={{}}
+        placeholder={placeholder}
       />
       {formik.touched[name] && formik.errors[name] && (
         <FormHelperText error id={`standard-weight-helper-text-${id || name}`}>

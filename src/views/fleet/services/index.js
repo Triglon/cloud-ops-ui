@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // material-ui
-import { Divider, FormControl, FormHelperText, Grid, Typography } from '@mui/material';
+import { Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 
 import { gridSpacing } from 'store/constant';
 import { RepositorySelect } from './RepositorySelect';
@@ -16,6 +16,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import CoreApi from '../../../api/CoreApi';
 import { LoadingButton } from '@mui/lab';
+import Autocomplete from '@mui/material/Autocomplete';
+import { FormikTextInput } from '../../utilities/FormikTextInput';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
@@ -34,9 +36,13 @@ const Services = () => {
       project: '',
       repository_connection: '',
       repository_branch: '',
-      repository_url: ''
+      repository_url: '',
+      name: '',
+      environment: ''
     },
     validationSchema: Yup.object({
+      name: Yup.string().max(255).required('Please enter service name'),
+      environment: Yup.string().max(255).required('Please select environment'),
       project: Yup.string().max(255).required('Please select project'),
       repository_connection: Yup.string().max(255).required('Please select connection'),
       repository_branch: Yup.string().max(255).required('Please select branch'),
@@ -61,10 +67,32 @@ const Services = () => {
       // helpers.setSubmitting(false);
     }
   });
+  const options = ['development', 'staging', 'production'];
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
       <Grid container spacing={gridSpacing}>
+        <Grid item xs={12}>
+          <Typography>Service</Typography>
+          <Divider sx={{ borderColor: 'primary.main' }}></Divider>
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl>
+            <FormikTextInput formik={formik} name="name" type={'text'} label={'Service Name'} placeholder={'api'} />
+          </FormControl>
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl fullWidth>
+            <Autocomplete
+              freeSolo // allows free text input
+              autoSelect
+              options={options}
+              onChange={(event, value) => formik.setFieldValue('environment', value || '')}
+              renderInput={(params) => <TextField {...params} label="Select environment or type your own" variant="outlined" />}
+            />
+            <FormHelperText error>{formik.errors.environment}</FormHelperText>
+          </FormControl>
+        </Grid>
         <Grid item xs={12}>
           <Typography>Project</Typography>
           <Divider sx={{ borderColor: 'primary.main' }}></Divider>
@@ -92,6 +120,7 @@ const Services = () => {
             />
           </FormControl>
         </Grid>
+
         <Grid item xs={12}>
           <LoadingButton loading={formik.isSubmitting} type={'submit'} variant={'contained'}>
             Create
