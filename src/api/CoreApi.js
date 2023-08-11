@@ -21,8 +21,8 @@ export default class CoreApi {
     return await core_axios.get('/my-profile');
   };
 
-  static getGithubLoginUrl = async () => {
-    return await core_axios.get('/accounts/github/login/url');
+  static getRepoLoginUrl = async (provider) => {
+    return await core_axios.get(`/accounts/${provider}/login/url`);
   };
 
   static updateRepoConnection = async (repoConnectionId, uid) => {

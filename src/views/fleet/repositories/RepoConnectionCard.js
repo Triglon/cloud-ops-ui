@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, CardActionArea, Grid, Link, Menu, MenuItem, Skeleton, Typography } from '@mui/material';
+import { Avatar, Box, Button, CardActionArea, Grid, Link, Menu, MenuItem, Skeleton, Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -136,26 +136,23 @@ const RepoConnectionCard = ({ isLoading, data }) => {
                 <Grid item>
                   <Grid container alignItems="center">
                     <Grid item>
-                      <Link target={'_blank'} href={data.url} rel={'noreferrer'} underline={'hover'}>
+                      <Link
+                        target={'_blank'}
+                        href={data.url}
+                        rel={'noreferrer'}
+                        variant={'button'}
+                        underline={'always'}
+                        sx={{ textDecorationColor: theme.palette.secondary.light }}
+                      >
                         <Typography
                           sx={{ color: theme.palette.secondary.light, fontSize: '1.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}
                         >
-                          {data.url}
+                          {data?.provider?.toUpperCase() || <Skeleton />}
+                          {/*<Button variant={'contained'}> {data?.provider?.toUpperCase() || <Skeleton />}</Button>*/}
                         </Typography>
                       </Link>
                     </Grid>
                   </Grid>
-                </Grid>
-                <Grid item sx={{ mb: 1.25 }}>
-                  <Typography
-                    sx={{
-                      fontSize: '1rem',
-                      fontWeight: 500,
-                      color: theme.palette.secondary[200]
-                    }}
-                  >
-                    {data?.provider?.toUpperCase() || <Skeleton />}
-                  </Typography>
                 </Grid>
               </Grid>
             </Box>

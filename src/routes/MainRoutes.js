@@ -6,7 +6,7 @@ import Loadable from 'ui-component/Loadable';
 import Pipeline from '../views/fleet/pipeline';
 import Services from '../views/fleet/services';
 import { RepositoriesView } from '../views/fleet/repositories';
-import { GithubSuccessView } from '../views/fleet/repositories/github-success';
+import { RepoConnectionSuccessView } from '../views/fleet/repositories/repo-connection-success';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -63,8 +63,8 @@ const MainRoutes = {
               element: <RepositoriesView />
             },
             {
-              path: 'github-success',
-              element: <GithubSuccessView />
+              path: 'repo-connection-success',
+              element: <RepoConnectionSuccessView />
             }
           ]
           // element: <RepositoriesView />

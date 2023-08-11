@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { useState, useEffect } from 'react';
 
-export const GithubSuccessView = () => {
+export const RepoConnectionSuccessView = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     localStorage.setItem('uid', urlParams.get('uid'));

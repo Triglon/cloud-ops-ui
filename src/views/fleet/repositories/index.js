@@ -10,11 +10,12 @@ export const RepositoriesView = (props) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const connectionList = useSelector((state) => state.repoConnection.list || []);
+  const [reload, setReload] = useState(false);
 
-  const openFB = async () => {
-    const urlData = await CoreApi.getGithubLoginUrl();
-    const w = 600;
-    const h = 400;
+  const openRepoConnection = async (provider) => {
+    const urlData = await CoreApi.getRepoLoginUrl(provider);
+    const w = 800;
+    const h = 600;
 
     const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screenX;
     const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screenY;
@@ -54,13 +55,10 @@ export const RepositoriesView = (props) => {
         const repoConnectionId = localStorage.getItem('repoConnectionId');
         localStorage.removeItem('uid');
         localStorage.removeItem('repoConnectionId');
-        const data = await CoreApi.updateRepoConnection(repoConnectionId, uid);
-        // const urlParams = new URLSearchParams(platformWindow.location.search);
-        // let uid = urlParams.get('uid');
-        setIsLoading(false);
+        await CoreApi.updateRepoConnection(repoConnectionId, uid);
 
-        const res = await CoreApi.getRepoConnections();
-        dispatch(repoConnectionActions.setList(res.data.results));
+        // trigger reload
+        setReload(!reload);
       }
     }, 500);
   };
@@ -71,7 +69,7 @@ export const RepositoriesView = (props) => {
       dispatch(repoConnectionActions.setList(res.data.results));
       setIsLoading(false);
     });
-  }, []);
+  }, [reload]);
 
   const getSkeleton = () => {
     return (
@@ -105,8 +103,15 @@ export const RepositoriesView = (props) => {
         <Grid container spacing={gridSpacing} justifyContent="flex-end">
           <Grid item xs={2}>
             <FormControl fullWidth>
-              <Button color="primary" variant="contained" onClick={openFB}>
+              <Button color="primary" variant="contained" onClick={() => openRepoConnection('github')}>
                 Connect Github
+              </Button>
+            </FormControl>
+          </Grid>
+          <Grid item xs={2}>
+            <FormControl fullWidth>
+              <Button color="primary" variant="contained" onClick={() => openRepoConnection('bitbucket')}>
+                Connect Bitbucket
               </Button>
             </FormControl>
           </Grid>
