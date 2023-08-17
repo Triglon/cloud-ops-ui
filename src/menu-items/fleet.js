@@ -11,9 +11,17 @@ const fleet = {
   children: [
     {
       id: 'default',
-      title: 'Fleet',
+      title: 'Overview',
       type: 'item',
-      url: AppRoutes.fleet,
+      url: AppRoutes.overview,
+      icon: IconCloudComputing,
+      breadcrumbs: false
+    },
+    {
+      id: 'services',
+      title: 'Services',
+      type: 'item',
+      url: AppRoutes.services,
       icon: IconCloudComputing,
       breadcrumbs: false
     },

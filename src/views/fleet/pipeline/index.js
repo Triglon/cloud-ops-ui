@@ -95,7 +95,7 @@ const Pipeline = () => {
               <PipelineEnvCard isLoading={isLoading} data={env} />
 
               {env?.pipeline?.stages?.map((stage) => (
-                <Box key={stage} sx={{ pt: 2 }}>
+                <Box sx={{ pt: 2 }} key={`${env.name}-${stage}`}>
                   <PipelineStageCard isLoading={isLoading} data={stage} />
                 </Box>
               ))}

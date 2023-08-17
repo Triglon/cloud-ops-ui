@@ -7,6 +7,7 @@ import Pipeline from '../views/fleet/pipeline';
 import Services from '../views/fleet/services';
 import { RepositoriesView } from '../views/fleet/repositories';
 import { RepoConnectionSuccessView } from '../views/fleet/repositories/repo-connection-success';
+import DeploymentDiagram from '../views/fleet/overview';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -44,8 +45,8 @@ const MainRoutes = {
       path: 'fleet',
       children: [
         {
-          path: '',
-          element: <Services />
+          path: 'overview',
+          element: <DeploymentDiagram />
         },
         {
           path: 'services',

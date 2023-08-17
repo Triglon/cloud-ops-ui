@@ -4,6 +4,7 @@ export const AppRoutes = {
   register: '/register',
   privacyPolicy: 'privacy-policy',
   fleet: 'fleet/',
+  overview: 'fleet/overview',
   pipeline: 'fleet/pipeline',
   services: 'fleet/services',
   repositories: 'fleet/repositories'
