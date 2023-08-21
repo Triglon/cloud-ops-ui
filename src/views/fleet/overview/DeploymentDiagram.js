@@ -14,7 +14,9 @@ import 'reactflow/dist/style.css';
 import { useCallback, useState } from 'react';
 import DatabaseNode from './elements/DatabaseNode';
 import ResizableNode from './elements/ResizableNode';
-import { customNodeStyles } from './elements/constants';
+import { textCenterNodeStyle, textTopNodeStyle } from './elements/constants';
+import FargateNode from './elements/FargateNode';
+import { initialNodes } from './initialNodes';
 
 const initialEdges = [
   // {
@@ -91,24 +93,9 @@ const initialEdges = [
   // }
 ];
 
-const initialNodes = [
-  {
-    id: '1',
-    type: 'ResizableNode',
-    data: { label: 'Load Balancer' },
-    position: { x: 293, y: -154 },
-    style: customNodeStyles
-  },
-  { id: '2', type: 'ResizableNode', data: { label: 'Container Service' }, position: { x: 300, y: 100 } },
-  { id: '3', type: 'ResizableNode', data: { label: 'Web Service Tasks' }, position: { x: 500, y: 50 } },
-  { id: '4', type: 'ResizableNode', data: { label: 'Background Tasks' }, position: { x: 500, y: 150 } },
-  { id: '5', type: 'ResizableNode', data: { label: 'Redis Cache' }, position: { x: 700, y: 150 } },
-  { id: '6', type: 'DatabaseNode', data: { label: 'PostgreSQL' }, position: { x: 700, y: 50 } },
-  { id: '7', type: 'ResizableNode', data: { label: 'Auto Scaling' }, position: { x: 500, y: 250 } }
-];
-
 const nodeTypes = {
   DatabaseNode,
+  FargateNode,
   ResizableNode
 };
 
@@ -132,7 +119,7 @@ function CloudArchitecture() {
   );
   const onNodesChange = useCallback((changes) => {
     setNodes((nds) => {
-      // console.log(nds);
+      console.log(nds);
       return applyNodeChanges(changes, nds);
     });
   }, []);
