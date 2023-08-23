@@ -79,43 +79,42 @@ export const initialNodes = [
   {
     id: '5',
     type: 'AWSServiceNode',
-
     data: {
       label: 'Redis Cache',
-      icon: awsIcons.redis
+      icon: 'redis-elastic-cache'
     },
     position: {
-      x: 616.1833243025008,
-      y: 102.7159207931847
+      x: 1698.0178734683573,
+      y: 367.0150472811372
     },
-    width: 119,
-    height: 61,
-    selected: true,
+    width: 99,
+    height: 89,
+    selected: false,
     positionAbsolute: {
-      x: 616.1833243025008,
-      y: 102.7159207931847
+      x: 1698.0178734683573,
+      y: 367.0150472811372
     },
-    dragging: true
+    dragging: false
   },
   {
     id: '6',
     type: 'AWSServiceNode',
     data: {
       label: 'PostgreSQL',
-      icon: awsIcons.rds
+      icon: 'rds'
     },
     position: {
-      x: 561.6279720849022,
-      y: -455.53740891753546
+      x: 1689.6279720849022,
+      y: 150.46259108246454
     },
     width: 102,
     height: 121,
-    selected: false,
+    selected: true,
     positionAbsolute: {
-      x: 561.6279720849022,
-      y: -455.53740891753546
+      x: 1689.6279720849022,
+      y: 150.46259108246454
     },
-    dragging: false
+    dragging: true
   },
   {
     id: '7',
@@ -152,7 +151,7 @@ export const initialNodes = [
     type: 'AWSServiceNode',
     data: {
       label: 'Task 1',
-      icon: awsIcons.fargate
+      icon: 'fargate'
     },
     parentNode: 'ecs-service-web',
     extent: 'parent',
@@ -174,7 +173,7 @@ export const initialNodes = [
     type: 'AWSServiceNode',
     data: {
       label: 'Task 2',
-      icon: awsIcons.fargate
+      icon: 'fargate'
     },
     parentNode: 'ecs-service-web',
     extent: 'parent',
@@ -196,7 +195,7 @@ export const initialNodes = [
     type: 'AWSServiceNode',
     data: {
       label: 'Task N',
-      icon: awsIcons.fargate
+      icon: 'fargate'
     },
     position: {
       x: 391.5202087823493,
@@ -249,7 +248,7 @@ export const initialNodes = [
     type: 'AWSServiceNode',
     data: {
       label: 'Worker 1',
-      icon: awsIcons.fargate
+      icon: 'fargate'
     },
     position: {
       x: 32.22250541043593,
@@ -271,7 +270,7 @@ export const initialNodes = [
     type: 'AWSServiceNode',
     data: {
       label: 'Worker 2',
-      icon: awsIcons.fargate
+      icon: 'fargate'
     },
     position: {
       x: 403.33921218274133,
@@ -293,7 +292,7 @@ export const initialNodes = [
     type: 'AWSServiceNode',
     data: {
       label: 'Worker N',
-      icon: awsIcons.fargate
+      icon: 'fargate'
     },
     position: {
       x: 218.96275913662805,
