@@ -12,10 +12,9 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { useCallback, useState } from 'react';
-import DatabaseNode from './elements/DatabaseNode';
+import AWSServiceNode from './elements/AWSServiceNode';
 import ResizableNode from './elements/ResizableNode';
 import { textCenterNodeStyle, textTopNodeStyle } from './elements/constants';
-import FargateNode from './elements/FargateNode';
 import { initialNodes } from './initialNodes';
 
 const initialEdges = [
@@ -94,8 +93,7 @@ const initialEdges = [
 ];
 
 const nodeTypes = {
-  DatabaseNode,
-  FargateNode,
+  AWSServiceNode: AWSServiceNode,
   ResizableNode
 };
 

@@ -1,3 +1,5 @@
+import { awsIcons } from './elements/constants';
+
 export const initialNodes = [
   {
     id: 'elb',
@@ -75,60 +77,32 @@ export const initialNodes = [
     resizing: false
   },
   {
-    id: '4',
-    type: 'ResizableNode',
-    style: {
-      padding: 10,
-      borderRadius: 15,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      border: '1px solid black',
-      justifyContent: 'center'
-    },
-    data: {
-      label: 'Background Tasks'
-    },
-    position: {
-      x: 500,
-      y: 150
-    },
-    width: 156,
-    height: 61
-  },
-  {
     id: '5',
-    type: 'ResizableNode',
-    style: {
-      padding: 10,
-      borderRadius: 15,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      border: '1px solid black',
-      justifyContent: 'center'
-    },
+    type: 'AWSServiceNode',
+
     data: {
-      label: 'Redis Cache'
+      label: 'Redis Cache',
+      icon: awsIcons.redis
     },
     position: {
-      x: 696.0023295781655,
-      y: 28.737330537690468
+      x: 616.1833243025008,
+      y: 102.7159207931847
     },
     width: 119,
     height: 61,
-    selected: false,
+    selected: true,
     positionAbsolute: {
-      x: 696.0023295781655,
-      y: 28.737330537690468
+      x: 616.1833243025008,
+      y: 102.7159207931847
     },
     dragging: true
   },
   {
     id: '6',
-    type: 'DatabaseNode',
+    type: 'AWSServiceNode',
     data: {
-      label: 'PostgreSQL'
+      label: 'PostgreSQL',
+      icon: awsIcons.rds
     },
     position: {
       x: 561.6279720849022,
@@ -166,7 +140,7 @@ export const initialNodes = [
     extent: 'parent',
     width: 120,
     height: 61,
-    selected: true,
+    selected: false,
     positionAbsolute: {
       x: 1205.6463950905018,
       y: 145.8205150902038
@@ -174,10 +148,11 @@ export const initialNodes = [
     dragging: false
   },
   {
-    id: '8',
-    type: 'FargateNode',
+    id: 'ecs-service-web-task-1',
+    type: 'AWSServiceNode',
     data: {
-      label: 'Task 1'
+      label: 'Task 1',
+      icon: awsIcons.fargate
     },
     parentNode: 'ecs-service-web',
     extent: 'parent',
@@ -195,10 +170,11 @@ export const initialNodes = [
     dragging: false
   },
   {
-    id: '9',
-    type: 'FargateNode',
+    id: 'ecs-service-web-task-2',
+    type: 'AWSServiceNode',
     data: {
-      label: 'Task 2'
+      label: 'Task 2',
+      icon: awsIcons.fargate
     },
     parentNode: 'ecs-service-web',
     extent: 'parent',
@@ -216,10 +192,11 @@ export const initialNodes = [
     }
   },
   {
-    id: '10',
-    type: 'FargateNode',
+    id: 'ecs-service-web-task-N',
+    type: 'AWSServiceNode',
     data: {
-      label: 'Task N'
+      label: 'Task N',
+      icon: awsIcons.fargate
     },
     position: {
       x: 391.5202087823493,
@@ -233,6 +210,103 @@ export const initialNodes = [
     positionAbsolute: {
       x: 1383.8144816873903,
       y: -18.856709056117666
+    },
+    dragging: false
+  },
+  {
+    id: 'ecs-service-bg',
+    type: 'ResizableNode',
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px solid black',
+      justifyContent: 'top',
+      width: 534,
+      height: 244
+    },
+    data: {
+      label: 'Background Tasks'
+    },
+    position: {
+      x: 992.8524417963419,
+      y: 274.0995357041148
+    },
+    width: 534,
+    height: 244,
+    selected: false,
+    positionAbsolute: {
+      x: 992.8524417963419,
+      y: 274.0995357041148
+    },
+    dragging: false,
+    resizing: false
+  },
+  {
+    id: 'ecs-service-bg-worker-1',
+    type: 'AWSServiceNode',
+    data: {
+      label: 'Worker 1',
+      icon: awsIcons.fargate
+    },
+    position: {
+      x: 32.22250541043593,
+      y: 77.03396602030648
+    },
+    parentNode: 'ecs-service-bg',
+    extent: 'parent',
+    width: 102,
+    height: 121,
+    selected: false,
+    positionAbsolute: {
+      x: 1025.0749472067778,
+      y: 351.1335017244213
+    },
+    dragging: false
+  },
+  {
+    id: 'ecs-service-bg-worker-2',
+    type: 'AWSServiceNode',
+    data: {
+      label: 'Worker 2',
+      icon: awsIcons.fargate
+    },
+    position: {
+      x: 403.33921218274133,
+      y: 66.39686295995375
+    },
+    parentNode: 'ecs-service-bg',
+    extent: 'parent',
+    width: 102,
+    height: 121,
+    selected: false,
+    positionAbsolute: {
+      x: 1396.1916539790832,
+      y: 340.4963986640686
+    },
+    dragging: false
+  },
+  {
+    id: 'ecs-service-bg-worker-N',
+    type: 'AWSServiceNode',
+    data: {
+      label: 'Worker N',
+      icon: awsIcons.fargate
+    },
+    position: {
+      x: 218.96275913662805,
+      y: 74.6701653402281
+    },
+    parentNode: 'ecs-service-bg',
+    extent: 'parent',
+    width: 102,
+    height: 121,
+    selected: false,
+    positionAbsolute: {
+      x: 1211.81520093297,
+      y: 348.7697010443429
     },
     dragging: false
   }
