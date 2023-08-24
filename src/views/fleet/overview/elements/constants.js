@@ -5,7 +5,6 @@ export const textCenterNodeStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  border: '1px solid black',
   justifyContent: 'center'
 };
 

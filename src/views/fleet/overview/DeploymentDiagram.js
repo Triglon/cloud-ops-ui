@@ -16,85 +16,13 @@ import AWSServiceNode from './elements/AWSServiceNode';
 import ResizableNode from './elements/ResizableNode';
 import { textCenterNodeStyle, textTopNodeStyle } from './elements/constants';
 import { initialNodes } from './initialNodes';
-
-const initialEdges = [
-  // {
-  //   id: 'e1',
-  //   source: '1',
-  //   target: '2',
-  //   type: 'smoothstep',
-  //   markerEnd: {
-  //     type: MarkerType.ArrowClosed,
-  //     width: 20,
-  //     height: 20,
-  //     color: '#FF0072'
-  //   }
-  // },
-  // {
-  //   id: 'e2',
-  //   source: '2',
-  //   target: '3',
-  //   type: 'smoothstep',
-  //   markerEnd: {
-  //     type: MarkerType.ArrowClosed,
-  //     width: 20,
-  //     height: 20,
-  //     color: '#FF0072'
-  //   }
-  // },
-  // {
-  //   id: 'e3',
-  //   source: '2',
-  //   target: '4',
-  //   type: 'smoothstep',
-  //   markerEnd: {
-  //     type: MarkerType.ArrowClosed,
-  //     width: 20,
-  //     height: 20,
-  //     color: '#FF0072'
-  //   }
-  // },
-  // {
-  //   id: 'e4',
-  //   source: '3',
-  //   target: '6',
-  //   markerEnd: {
-  //     type: MarkerType.ArrowClosed,
-  //     width: 20,
-  //     height: 20,
-  //     color: '#FF0072'
-  //   },
-  //   type: 'smoothstep'
-  // },
-  // {
-  //   id: 'e5',
-  //   source: '4',
-  //   target: '5',
-  //   markerEnd: {
-  //     type: MarkerType.ArrowClosed,
-  //     width: 20,
-  //     height: 20,
-  //     color: '#FF0072'
-  //   },
-  //   type: 'smoothstep'
-  // },
-  // {
-  //   id: 'e6',
-  //   source: '7',
-  //   target: '3',
-  //   markerEnd: {
-  //     type: MarkerType.ArrowClosed,
-  //     width: 20,
-  //     height: 20,
-  //     color: '#FF0072'
-  //   },
-  //   type: 'smoothstep'
-  // }
-];
+import { initialEdges } from './initialEdges';
+import BiArrowNode from './elements/ExpandingArrowNode';
 
 const nodeTypes = {
-  AWSServiceNode: AWSServiceNode,
-  ResizableNode
+  AWSServiceNode,
+  ResizableNode,
+  BiArrowNode
 };
 
 function CloudArchitecture() {

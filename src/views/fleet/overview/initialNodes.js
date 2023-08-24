@@ -1,15 +1,51 @@
-import { awsIcons } from './elements/constants';
+import { awsIcons, textCenterNodeStyle } from './elements/constants';
+import { Position } from 'reactflow';
 
 export const initialNodes = [
   {
     id: 'elb',
     type: 'ResizableNode',
+    sourcePosition: 'right',
+    targetPosition: 'left',
     data: {
       label: 'Load Balancer'
     },
     position: {
-      x: 293,
-      y: -154
+      x: 201.24555655352026,
+      y: -352.2798367337409
+    },
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px solid black',
+      justifyContent: 'center',
+      width: 141,
+      height: 183
+    },
+    width: 141,
+    height: 183,
+    selected: false,
+    positionAbsolute: {
+      x: 201.24555655352026,
+      y: -352.2798367337409
+    },
+    dragging: false,
+    resizing: false
+  },
+  {
+    id: 'elb-target',
+    type: 'ResizableNode',
+    sourcePosition: 'right',
+    targetPosition: 'left',
+    data: {
+      label: 'Load Balancer Target Group'
+    },
+    position: {
+      x: 415.6521591355722,
+      y: -291.30261836516615
     },
     style: {
       padding: 10,
@@ -20,8 +56,14 @@ export const initialNodes = [
       border: '1px solid black',
       justifyContent: 'center'
     },
-    width: 131,
-    height: 61
+    width: 215,
+    height: 61,
+    selected: false,
+    positionAbsolute: {
+      x: 415.6521591355722,
+      y: -291.30261836516615
+    },
+    dragging: false
   },
   {
     id: 'ecs-cluster',
@@ -33,21 +75,33 @@ export const initialNodes = [
       flexDirection: 'column',
       alignItems: 'center',
       border: '1px solid black',
-      justifyContent: 'center'
+      justifyContent: 'top',
+      width: 718,
+      height: 831
     },
     data: {
-      label: 'Cluster'
+      label: 'ECS Cluster'
     },
     position: {
-      x: 300,
-      y: 100
+      x: 728.9400915623339,
+      y: -369.4112508085709
     },
-    width: 86,
-    height: 61
+    width: 718,
+    height: 831,
+    selected: false,
+    positionAbsolute: {
+      x: 728.9400915623339,
+      y: -369.4112508085709
+    },
+    dragging: false,
+    resizing: false
   },
   {
     id: 'ecs-service-web',
     type: 'ResizableNode',
+    parentNode: 'ecs-cluster',
+    sourcePosition: 'right',
+    targetPosition: 'left',
     style: {
       padding: 10,
       borderRadius: 15,
@@ -63,15 +117,15 @@ export const initialNodes = [
       label: 'Web Service Tasks'
     },
     position: {
-      x: 990.2377497712293,
-      y: -118.34678153716868
+      x: 87.60724679277564,
+      y: 56.08275280951193
     },
     width: 542,
     height: 345,
     selected: false,
     positionAbsolute: {
-      x: 990.2377497712293,
-      y: -118.34678153716868
+      x: 814.8538477303844,
+      y: -311.6350073743339
     },
     dragging: false,
     resizing: false
@@ -79,46 +133,6 @@ export const initialNodes = [
   {
     id: '5',
     type: 'AWSServiceNode',
-    data: {
-      label: 'Redis Cache',
-      icon: 'redis-elastic-cache'
-    },
-    position: {
-      x: 1698.0178734683573,
-      y: 367.0150472811372
-    },
-    width: 99,
-    height: 89,
-    selected: false,
-    positionAbsolute: {
-      x: 1698.0178734683573,
-      y: 367.0150472811372
-    },
-    dragging: false
-  },
-  {
-    id: '6',
-    type: 'AWSServiceNode',
-    data: {
-      label: 'PostgreSQL',
-      icon: 'rds'
-    },
-    position: {
-      x: 1689.6279720849022,
-      y: 150.46259108246454
-    },
-    width: 102,
-    height: 121,
-    selected: true,
-    positionAbsolute: {
-      x: 1689.6279720849022,
-      y: 150.46259108246454
-    },
-    dragging: true
-  },
-  {
-    id: '7',
-    type: 'ResizableNode',
     style: {
       padding: 10,
       borderRadius: 15,
@@ -129,26 +143,93 @@ export const initialNodes = [
       justifyContent: 'center'
     },
     data: {
-      label: 'Auto Scaling'
+      label: 'Redis Cache',
+      icon: 'redis-elastic-cache'
     },
     position: {
-      x: 215.4086453192724,
-      y: 264.1672966273725
+      x: 1613.376604135607,
+      y: 122.70956534342639
     },
-    parentNode: 'ecs-service-web',
-    extent: 'parent',
-    width: 120,
-    height: 61,
+    width: 119,
+    height: 109,
     selected: false,
     positionAbsolute: {
-      x: 1205.6463950905018,
-      y: 145.8205150902038
+      x: 1613.376604135607,
+      y: 122.70956534342639
     },
     dragging: false
   },
   {
+    id: '6',
+    type: 'AWSServiceNode',
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px solid black',
+      justifyContent: 'center'
+    },
+    data: {
+      label: 'PostgreSQL',
+      icon: 'rds'
+    },
+    position: {
+      x: 1614.605028812692,
+      y: -166.94216891534876
+    },
+    width: 122,
+    height: 141,
+    selected: false,
+    positionAbsolute: {
+      x: 1614.605028812692,
+      y: -166.94216891534876
+    },
+    dragging: true
+  },
+  {
+    id: 'auto-scaling',
+    type: 'BiArrowNode',
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px dashed black',
+      justifyContent: 'center'
+    },
+    data: {
+      label: 'Auto Scaling'
+    },
+    position: {
+      x: 25.610740046753108,
+      y: 269.95584304682274
+    },
+    parentNode: 'ecs-service-web',
+    extent: 'parent',
+    width: 490,
+    height: 61,
+    selected: false,
+    positionAbsolute: {
+      x: 842.1580784018627,
+      y: -43.372654952236246
+    },
+    dragging: true
+  },
+  {
     id: 'ecs-service-web-task-1',
     type: 'AWSServiceNode',
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px solid black',
+      justifyContent: 'center'
+    },
     data: {
       label: 'Task 1',
       icon: 'fargate'
@@ -159,8 +240,8 @@ export const initialNodes = [
       x: 37.525705596371154,
       y: 96.62501467093269
     },
-    width: 102,
-    height: 121,
+    width: 122,
+    height: 141,
     selected: false,
     positionAbsolute: {
       x: 1029.8199785014122,
@@ -175,14 +256,23 @@ export const initialNodes = [
       label: 'Task 2',
       icon: 'fargate'
     },
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px dashed black',
+      justifyContent: 'center'
+    },
     parentNode: 'ecs-service-web',
     extent: 'parent',
     position: {
       x: 218.3257967791792,
       y: 98.37931707087697
     },
-    width: 102,
-    height: 121,
+    width: 122,
+    height: 141,
     selected: false,
     dragging: false,
     positionAbsolute: {
@@ -193,6 +283,15 @@ export const initialNodes = [
   {
     id: 'ecs-service-web-task-N',
     type: 'AWSServiceNode',
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px dashed black',
+      justifyContent: 'center'
+    },
     data: {
       label: 'Task N',
       icon: 'fargate'
@@ -203,8 +302,8 @@ export const initialNodes = [
     },
     parentNode: 'ecs-service-web',
     extent: 'parent',
-    width: 102,
-    height: 121,
+    width: 122,
+    height: 141,
     selected: false,
     positionAbsolute: {
       x: 1383.8144816873903,
@@ -215,30 +314,31 @@ export const initialNodes = [
   {
     id: 'ecs-service-bg',
     type: 'ResizableNode',
+    parentNode: 'ecs-cluster',
     style: {
       padding: 10,
       borderRadius: 15,
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'left',
       border: '1px solid black',
       justifyContent: 'top',
-      width: 534,
-      height: 244
+      width: 537,
+      height: 367
     },
     data: {
       label: 'Background Tasks'
     },
     position: {
-      x: 992.8524417963419,
-      y: 274.0995357041148
+      x: 90.22193881788826,
+      y: 436.67463567772
     },
-    width: 534,
-    height: 244,
+    width: 537,
+    height: 367,
     selected: false,
     positionAbsolute: {
-      x: 992.8524417963419,
-      y: 274.0995357041148
+      x: 819.1620303802222,
+      y: 67.26338486914909
     },
     dragging: false,
     resizing: false
@@ -246,6 +346,15 @@ export const initialNodes = [
   {
     id: 'ecs-service-bg-worker-1',
     type: 'AWSServiceNode',
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px solid black',
+      justifyContent: 'center'
+    },
     data: {
       label: 'Worker 1',
       icon: 'fargate'
@@ -256,8 +365,8 @@ export const initialNodes = [
     },
     parentNode: 'ecs-service-bg',
     extent: 'parent',
-    width: 102,
-    height: 121,
+    width: 122,
+    height: 141,
     selected: false,
     positionAbsolute: {
       x: 1025.0749472067778,
@@ -268,45 +377,93 @@ export const initialNodes = [
   {
     id: 'ecs-service-bg-worker-2',
     type: 'AWSServiceNode',
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px dashed black',
+      justifyContent: 'center'
+    },
     data: {
       label: 'Worker 2',
       icon: 'fargate'
     },
     position: {
-      x: 403.33921218274133,
-      y: 66.39686295995375
+      x: 211.40006738955594,
+      y: 77.31070385931628
     },
     parentNode: 'ecs-service-bg',
     extent: 'parent',
-    width: 102,
-    height: 121,
+    width: 122,
+    height: 141,
     selected: false,
     positionAbsolute: {
-      x: 1396.1916539790832,
-      y: 340.4963986640686
+      x: 1030.5620977697781,
+      y: 144.57408872846537
     },
     dragging: false
   },
   {
     id: 'ecs-service-bg-worker-N',
     type: 'AWSServiceNode',
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px dashed black',
+      justifyContent: 'center'
+    },
     data: {
       label: 'Worker N',
       icon: 'fargate'
     },
     position: {
-      x: 218.96275913662805,
-      y: 74.6701653402281
+      x: 385.42636799479897,
+      y: 77.77507414057482
     },
     parentNode: 'ecs-service-bg',
     extent: 'parent',
-    width: 102,
-    height: 121,
+    width: 122,
+    height: 141,
     selected: false,
     positionAbsolute: {
-      x: 1211.81520093297,
-      y: 348.7697010443429
+      x: 1204.5883983750211,
+      y: 145.0384590097239
     },
     dragging: false
+  },
+  {
+    id: 'auto-scaling-2',
+    type: 'BiArrowNode',
+    style: {
+      padding: 10,
+      borderRadius: 15,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      border: '1px dashed black',
+      justifyContent: 'center'
+    },
+    data: {
+      label: 'Auto Scaling'
+    },
+    position: {
+      x: 25.610740046753108,
+      y: 269.95584304682274
+    },
+    parentNode: 'ecs-service-bg',
+    extent: 'parent',
+    width: 490,
+    height: 61,
+    selected: true,
+    positionAbsolute: {
+      x: 842.1580784018627,
+      y: -43.372654952236246
+    },
+    dragging: true
   }
 ];
