@@ -1,6 +1,3 @@
-import { awsIcons, textCenterNodeStyle } from './elements/constants';
-import { Position } from 'reactflow';
-
 export const initialNodes = [
   {
     id: 'elb',
@@ -133,6 +130,8 @@ export const initialNodes = [
   {
     id: '5',
     type: 'AWSServiceNode',
+    sourcePosition: 'left',
+    targetPosition: 'right',
     style: {
       padding: 10,
       borderRadius: 15,
@@ -147,15 +146,15 @@ export const initialNodes = [
       icon: 'redis-elastic-cache'
     },
     position: {
-      x: 1613.376604135607,
-      y: 122.70956534342639
+      x: 1583.4955200286977,
+      y: 64.82159834212553
     },
     width: 119,
     height: 109,
     selected: false,
     positionAbsolute: {
-      x: 1613.376604135607,
-      y: 122.70956534342639
+      x: 1583.4955200286977,
+      y: 64.82159834212553
     },
     dragging: false
   },
@@ -176,15 +175,15 @@ export const initialNodes = [
       icon: 'rds'
     },
     position: {
-      x: 1614.605028812692,
-      y: -166.94216891534876
+      x: 1576.89533322258,
+      y: -303.81439735353354
     },
     width: 122,
     height: 141,
-    selected: false,
+    selected: true,
     positionAbsolute: {
-      x: 1614.605028812692,
-      y: -166.94216891534876
+      x: 1576.89533322258,
+      y: -303.81439735353354
     },
     dragging: true
   },
@@ -216,7 +215,7 @@ export const initialNodes = [
       x: 842.1580784018627,
       y: -43.372654952236246
     },
-    dragging: true
+    dragging: false
   },
   {
     id: 'ecs-service-web-task-1',
@@ -315,6 +314,8 @@ export const initialNodes = [
     id: 'ecs-service-bg',
     type: 'ResizableNode',
     parentNode: 'ecs-cluster',
+    sourcePosition: 'right',
+    targetPosition: 'left',
     style: {
       padding: 10,
       borderRadius: 15,
@@ -459,7 +460,7 @@ export const initialNodes = [
     extent: 'parent',
     width: 490,
     height: 61,
-    selected: true,
+    selected: false,
     positionAbsolute: {
       x: 842.1580784018627,
       y: -43.372654952236246

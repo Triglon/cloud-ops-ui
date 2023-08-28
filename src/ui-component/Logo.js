@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import { SvgIcon } from '@mui/material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import LogoSvg from '../logo_landscape_for_light_bg.svg';
+import LogoSvg from '../assets/images/logo.svg';
 
 /**
  * if you want to use image instead of <svg> uncomment following.
