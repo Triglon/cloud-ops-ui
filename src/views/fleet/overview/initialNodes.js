@@ -1,15 +1,16 @@
 export const initialNodes = [
   {
     id: 'elb',
-    type: 'ResizableNode',
+    type: 'AWSServiceNode',
     sourcePosition: 'right',
     targetPosition: 'left',
     data: {
-      label: 'Load Balancer'
+      label: 'Load Balancer',
+      icon: 'load-balancing'
     },
     position: {
-      x: 201.24555655352026,
-      y: -352.2798367337409
+      x: 413.5902644584578,
+      y: -329.4659424960204
     },
     style: {
       padding: 10,
@@ -19,48 +20,18 @@ export const initialNodes = [
       alignItems: 'center',
       border: '1px solid black',
       justifyContent: 'center',
-      width: 141,
-      height: 183
+      width: 160,
+      height: 160
     },
-    width: 141,
-    height: 183,
-    selected: false,
+    width: 160,
+    height: 160,
+    selected: true,
     positionAbsolute: {
-      x: 201.24555655352026,
-      y: -352.2798367337409
+      x: 413.5902644584578,
+      y: -329.4659424960204
     },
-    dragging: false,
+    dragging: true,
     resizing: false
-  },
-  {
-    id: 'elb-target',
-    type: 'ResizableNode',
-    sourcePosition: 'right',
-    targetPosition: 'left',
-    data: {
-      label: 'Load Balancer Target Group'
-    },
-    position: {
-      x: 415.6521591355722,
-      y: -291.30261836516615
-    },
-    style: {
-      padding: 10,
-      borderRadius: 15,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      border: '1px solid black',
-      justifyContent: 'center'
-    },
-    width: 215,
-    height: 61,
-    selected: false,
-    positionAbsolute: {
-      x: 415.6521591355722,
-      y: -291.30261836516615
-    },
-    dragging: false
   },
   {
     id: 'ecs-cluster',
@@ -128,7 +99,7 @@ export const initialNodes = [
     resizing: false
   },
   {
-    id: '5',
+    id: 'redis-cluster',
     type: 'AWSServiceNode',
     sourcePosition: 'left',
     targetPosition: 'right',
@@ -180,7 +151,7 @@ export const initialNodes = [
     },
     width: 122,
     height: 141,
-    selected: true,
+    selected: false,
     positionAbsolute: {
       x: 1576.89533322258,
       y: -303.81439735353354
@@ -280,7 +251,7 @@ export const initialNodes = [
     }
   },
   {
-    id: 'ecs-service-web-task-N',
+    id: 'ecs-service-web-task-n',
     type: 'AWSServiceNode',
     style: {
       padding: 10,

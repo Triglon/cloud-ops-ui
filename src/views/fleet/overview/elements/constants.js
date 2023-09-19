@@ -30,4 +30,4 @@ export const awsIcons = {
 };
 
 export const cloudfront = 'https://dd7ntn59m9ypi.cloudfront.net';
-export const cloudfrontIcons = `${cloudfront}/cloud-fleet/icons`;
+export const iconsBaseUrl = `${cloudfront}/cloud-fleet/icons`;

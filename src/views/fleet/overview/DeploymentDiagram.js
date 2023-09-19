@@ -38,6 +38,7 @@ function CloudArchitecture() {
           height: 20,
           color: '#FF0072'
         };
+        console.log(eds);
         return addEdge(params, eds);
         // console.log(edges);
       }),
